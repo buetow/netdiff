@@ -1,5 +1,45 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+# NetDiff (c) Paul C. Buetow (2014)
+# http://netdiff.buetow.org
 
 declare -r VERSION='VERSION_DEVEL'
+declare -i RC=0
 
-echo "This is version $VERSION of the example netdiff project."
+declare -r SERVER="${1}"   ; shift
+declare -r FILE="${1}"     ; shift
+declare -i PORT="${1}"     ; shift
+
+usage () {
+  cat <<USAGE
+This is NetDiff ${VERSION}. Usage:
+  netdiff SERVER FILE [PORT=1234] [DIFF OPTS]
+USAGE
+}
+
+[ -z "${FILE}" ] && usage && exit 0
+if [[ -z "${PORT}" || ${PORT} == 0 ]]; then
+  PORT=1234
+  declare -r DIFF_DEFAULT_OPTS=-u
+fi
+
+declare -r TMPFILE=$(mktemp)
+
+if [[ "${SERVER}" == "$(hostname)" || "${SERVER}" == "$(hostname -f)" ]]; then
+  nc -l -p ${PORT} < "${FILE}" > $TMPFILE
+  RC=$?
+else
+  sleep 0.1
+  nc ${SERVER} ${PORT} < "${FILE}" > $TMPFILE
+  RC=$?
+fi
+
+if [ $RC -ne 0 ]; then
+  echo 'Could not copy file via the network'
+else
+  diff $@ ${FILE} ${TMPFILE} ${DIFF_DEFAULT_OPTS}
+fi
+
+[ -f $TMPFILE ] && rm $TMPFILE
+exit $RC
+
