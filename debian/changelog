@@ -1,3 +1,9 @@
+netdiff (0.0.2) stable; urgency=low
+
+  * Sign the packages
+
+ -- Paul Buetow <paul@buetow.org>  Fri, 20 Jun 2014 01:18:01 +0200
+
 netdiff (0.0.1) stable; urgency=low
 
   * Initial version of the netdiff
