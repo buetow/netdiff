@@ -37,7 +37,7 @@ documentation:
 
 # Build a debian package (don't sign it, modify the arguments if you want to sign it)
 deb: all
-	dpkg-buildpackage -uc -us
+	dpkg-buildpackage #-uc -us
 
 dch: 
 	dch -i
