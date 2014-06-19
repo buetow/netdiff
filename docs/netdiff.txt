@@ -2,113 +2,21 @@ NAME
     netdiff - A netdiff project
 
 WTF?
-    You may use this project in order to build your own Debian package for
-    your own project. This has been tested with Debian GNU/Linux Squeeze and
-    Debian GNU/Linux Wheezy.
+    A simple script to diff two files via the network.
 
-    Feel free to modify any aspects. This project is just an empty example
-    netdiff.
+  usage
+    ClusterSSH onto two hosts at the same time and run on both hosts the
+    same command like:
 
-    Follow these steps:
+        netdiff HOSTNAME FILENAME
 
-  Install required packages
-    Run the following:
+    Where HOSTNAME can be the hostname of the first or the second host.
+    Depending on this the script will decide to be the client or the server
+    role.
 
-        sudo aptitude install lintian devscripts dpkg-dev make perl
+LICENSE
+    See package description or project website.
 
-    Todo: Ensure this are the correct packages. In order to test that I
-    would have to setup a blank Debian system.
-
-  Compile the project
-    Go to the to level directory and run
-
-        make
-
-    To test run
-
-        ./bin/netdiff
-
-    It should print out the version number of the project.
-
-  Create a Debian package
-    Go to the to level directory and run
-
-        make deb
-
-    It will create the files like:
-
-        ../netdiff_0.0.0.0_all.deb
-        ../netdiff_0.0.0.0.dsc
-        ../netdiff_0.0.0.0_amd64.changes
-        ../netdiff_0.0.0.0.tar.gz
-
-    It should create a debian package in ../. Check and install it, e.g:
-
-        lintian --pedantic ../netdiff_0.0.0.0_all.deb 
-        sudo dpkg -i ../netdiff_0.0.0.0_all.deb
-
-    Run
-
-        dpkg -L netdiff
-
-    to see whats in there. You can now run
-
-        /usr/bin/netdiff
-
-    or for example
-
-        man netdiff
-
-  Read the Makefile
-    Read the Makefile in order to understand what's going on.
-
-Customize
-    Now, since you understood everything feel free to customize everything
-    the way you want it. E.g.:
-
-        Don't use POD for documentation but LaTeX
-
-        Compile a C program
-
-        Include a ./lib dir, add it to the 'install' Makefile rule
-
-        etc etc.
-
-    You should also consider the following:
-
-  Manual page
-    This netdiff is using POD for creating manual pages. Edit
-    ./docs/netdiff.pod and run
-
-        make documentation
-
-    in order to build ./docs/netdiff.1. The page will be included in the
-    resulting debian package automatically. You can review the page with
-
-        man ./docs/netdiff.1
-
-  Renaming netdiff into your project name
-    Rename all files which have *netdiff* included into your own new package
-    name. You can do that with:
-
-        PROJECTNAME=yourproject
-        find . -name \*netdiff\* | 
-        while read netdiff; do git mv $netdiff ${netdiff/netdiff/$PROJECTNAME}; done
-
-    Search all content and rename *netdiff* into your own new package name.
-    You can do that with:
-
-        grep -R netdiff . | grep -v .git | 
-        cut -d: -f1 | uniq | xargs sed -i "s/netdiff/$PROJECTNAME/g"
-
-  Updating ./debian
-    Edit the following files accordingly to your new project (e.g. with
-    vim):
-
-        vim ./debian/{control,copyright,README}
-
-  Update changelog
-    Go to the to level directory and run
-
-        dch -i
+AUTHOR
+    Paul Buetow - <http://netdiff.buetow.org>
 

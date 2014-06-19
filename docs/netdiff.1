@@ -133,134 +133,19 @@
 netdiff \- A netdiff project
 .SH "WTF?"
 .IX Header "WTF?"
-You may use this project in order to build your own Debian package for your own project. This has been tested with Debian GNU/Linux Squeeze and Debian GNU/Linux Wheezy.
-.PP
-Feel free to modify any aspects. This project is just an empty example netdiff.
-.PP
-Follow these steps:
-.SS "Install required packages"
-.IX Subsection "Install required packages"
-Run the following:
+A simple script to diff two files via the network.
+.SS "usage"
+.IX Subsection "usage"
+ClusterSSH onto two hosts at the same time and run on both hosts the same command like:
 .PP
 .Vb 1
-\&    sudo aptitude install lintian devscripts dpkg\-dev make perl
+\&    netdiff HOSTNAME FILENAME
 .Ve
 .PP
-Todo: Ensure this are the correct packages. In order to test that I would have to setup a blank Debian system.
-.SS "Compile the project"
-.IX Subsection "Compile the project"
-Go to the to level directory and run
-.PP
-.Vb 1
-\&    make
-.Ve
-.PP
-To test run
-.PP
-.Vb 1
-\&    ./bin/netdiff
-.Ve
-.PP
-It should print out the version number of the project.
-.SS "Create a Debian package"
-.IX Subsection "Create a Debian package"
-Go to the to level directory and run
-.PP
-.Vb 1
-\&    make deb
-.Ve
-.PP
-It will create the files like:
-.PP
-.Vb 4
-\&    ../netdiff_0.0.0.0_all.deb
-\&    ../netdiff_0.0.0.0.dsc
-\&    ../netdiff_0.0.0.0_amd64.changes
-\&    ../netdiff_0.0.0.0.tar.gz
-.Ve
-.PP
-It should create a debian package in ../. Check and install it, e.g:
-.PP
-.Vb 2
-\&    lintian \-\-pedantic ../netdiff_0.0.0.0_all.deb 
-\&    sudo dpkg \-i ../netdiff_0.0.0.0_all.deb
-.Ve
-.PP
-Run
-.PP
-.Vb 1
-\&    dpkg \-L netdiff
-.Ve
-.PP
-to see whats in there. You can now run
-.PP
-.Vb 1
-\&    /usr/bin/netdiff
-.Ve
-.PP
-or for example
-.PP
-.Vb 1
-\&    man netdiff
-.Ve
-.SS "Read the Makefile"
-.IX Subsection "Read the Makefile"
-Read the Makefile in order to understand what's going on.
-.SH "Customize"
-.IX Header "Customize"
-Now, since you understood everything feel free to customize everything the way you want it. E.g.:
-.PP
-.Vb 1
-\&    Don\*(Aqt use POD for documentation but LaTeX
-\&
-\&    Compile a C program
-\&
-\&    Include a ./lib dir, add it to the \*(Aqinstall\*(Aq Makefile rule
-\&
-\&    etc etc.
-.Ve
-.PP
-You should also consider the following:
-.SS "Manual page"
-.IX Subsection "Manual page"
-This netdiff is using \s-1POD\s0 for creating manual pages. Edit ./docs/netdiff.pod and run
-.PP
-.Vb 1
-\&    make documentation
-.Ve
-.PP
-in order to build ./docs/netdiff.1. The page will be included in the resulting debian package automatically. You can review the page with
-.PP
-.Vb 1
-\&    man ./docs/netdiff.1
-.Ve
-.SS "Renaming netdiff into your project name"
-.IX Subsection "Renaming netdiff into your project name"
-Rename all files which have *netdiff* included into your own new package name. You can do that with:
-.PP
-.Vb 3
-\&    PROJECTNAME=yourproject
-\&    find . \-name \e*netdiff\e* | 
-\&    while read netdiff; do git mv $netdiff ${netdiff/netdiff/$PROJECTNAME}; done
-.Ve
-.PP
-Search all content and rename *netdiff* into your own new package name. You can do that with:
-.PP
-.Vb 2
-\&    grep \-R netdiff . | grep \-v .git | 
-\&    cut \-d: \-f1 | uniq | xargs sed \-i "s/netdiff/$PROJECTNAME/g"
-.Ve
-.SS "Updating ./debian"
-.IX Subsection "Updating ./debian"
-Edit the following files accordingly to your new project (e.g. with vim):
-.PP
-.Vb 1
-\&    vim ./debian/{control,copyright,README}
-.Ve
-.SS "Update changelog"
-.IX Subsection "Update changelog"
-Go to the to level directory and run
-.PP
-.Vb 1
-\&    dch \-i
-.Ve
+Where \s-1HOSTNAME\s0 can be the hostname of the first or the second host. Depending on this the script will decide to be the client or the server role.
+.SH "LICENSE"
+.IX Header "LICENSE"
+See package description or project website.
+.SH "AUTHOR"
+.IX Header "AUTHOR"
+Paul Buetow \- <http://netdiff.buetow.org>
