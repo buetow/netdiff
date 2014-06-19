@@ -1,15 +1,15 @@
-Source: template
+Source: netdiff
 Section: utils
 Priority: optional
-Maintainer: Paul Buetow <paul@buetow.org>
+Maintainer: Paul C. Buetow <paul@buetow.org>
 Build-Depends: 
 Standards-Version: 3.9.2
-Homepage: https://template.buetow.org
-Vcs-Git: https://github.com/rantanplan/template.git
-Vcs-Browser: https://github.com/rantanplan/template
+Homepage: https://netdiff.buetow.org
+Vcs-Git: https://github.com/rantanplan/netdiff.git
+Vcs-Browser: https://github.com/rantanplan/netdiff
 
-Package: template
+Package: netdiff
 Architecture: all
 Depends:
-Description: Small template package
- This is just a template package, which cann print Hello World.
+Description: Small netdiff package
+ This utility can be used to diff files accross the network

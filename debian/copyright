@@ -1,13 +1,13 @@
 Format: http://dep.debian.net/deps/dep5
-Upstream-Name: template
-Source: http://template.buetow.org
+Upstream-Name: netdiff
+Source: http://netdiff.buetow.org
 
 Files: *
-Copyright: 2012 Paul Buetow <paul@buetow.org>
+Copyright: 2014 Paul C. Buetow <paul@buetow.org>
 License: GPL-3.0+
 
 Files: debian/*
-Copyright: 2012 Paul Buetow <paul@buetow.org>
+Copyright: 2012 Paul C. Buetow <paul@buetow.org>
 License: GPL-3.0+
 
 License: GPL-3.0+
