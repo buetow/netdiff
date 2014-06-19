@@ -36,8 +36,10 @@ fi
 
 if [ $RC -ne 0 ]; then
   echo 'Could not copy file via the network'
+  RC=2 # Default trouble exit status of diff 
 else
   diff $@ ${FILE} ${TMPFILE} ${DIFF_DEFAULT_OPTS}
+  RC=$?
 fi
 
 [ -f $TMPFILE ] && rm $TMPFILE
