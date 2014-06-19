@@ -1,5 +1,7 @@
-netdiff (0.0.0) stable; urgency=low
+netdiff (0.0.1) stable; urgency=low
 
   * Initial version of the netdiff
+  * Still 0.0.x, so not ready for production yet
 
- -- Paul Buetow <paul@buetow.org>  Fri, 04 Jan 2013 07:53:32 +0100
+ -- Paul Buetow <paul@buetow.org>  Fri, 20 Jun 2014 01:16:39 +0200
+
