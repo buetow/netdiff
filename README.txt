@@ -88,8 +88,8 @@ Customize
         man ./docs/netdiff.1
 
   Renaming netdiff into your project name
-    Rename all files which have *netdiff* included into your own new
-    package name. You can do that with:
+    Rename all files which have *netdiff* included into your own new package
+    name. You can do that with:
 
         PROJECTNAME=yourproject
         find . -name \*netdiff\* | 
