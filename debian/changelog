@@ -1,3 +1,9 @@
+netdiff (0.0.3) stable; urgency=low
+
+  * Fix the exit status, always exit with the status of diff
+
+ -- Paul Buetow <paul@buetow.org>  Fri, 20 Jun 2014 01:41:56 +0200
+
 netdiff (0.0.2) stable; urgency=low
 
   * Sign the packages
