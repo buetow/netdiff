@@ -14,11 +14,13 @@ install:
 	test ! -d $(DESTDIR)/usr/bin && mkdir -p $(DESTDIR)/usr/bin || exit 0
 	test ! -d $(DESTDIR)/usr/share/$(NAME) && mkdir -p $(DESTDIR)/usr/share/$(NAME) || exit 0
 	cp ./bin/* $(DESTDIR)/usr/bin
-	#cp -r ./lib $(DESTDIR)/usr/share/$(NAME)/lib
+	test ! -d $(DESTDIR)/etc/default && mkdir -p $(DESTDIR)/etc/default || exit 0
+	cp ./src/netdiff.default.conf $(DESTDIR)/etc/default/netdiff
 
 deinstall:
 	test ! -z "$(DESTDIR)" && test -f $(DESTDIR)/usr/bin/$(NAME) && rm $(DESTDIR)/usr/bin/$(NAME) || exit 0
 	test ! -z "$(DESTDIR)/usr/share/$(NAME)" && -d $(DESTDIR)/usr/share/$(NAME) && rm -r $(DESTDIR)/usr/share/$(NAME) || exit 0
+	test ! -z "$(DESTDIR)" && test -f $(DESTDIR)/etc/default/netdiff && rm $(DESTDIR)/etc/default/netdiff || exit 0
 
 clean:
 	rm bin/*

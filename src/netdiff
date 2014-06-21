@@ -6,9 +6,10 @@
 declare -r VERSION='VERSION_DEVEL'
 declare -i RC=0
 
-declare -r SERVER="${1}" ; shift
-declare -r WHAT="${1}"   ; shift
-declare -i PORT="${1}"   ; shift
+declare -r SERVER="${1}"    ; shift
+declare -r WHAT="${1}"      ; shift
+declare -i PORT="${1}"      ; shift
+declare    DIFF_OPTS="${1}" ; shift
 
 
 usage () {
@@ -18,15 +19,16 @@ This is NetDiff ${VERSION}. Usage:
 USAGE
 }
 
+[ -f /etc/default/netdiff ] && source /etc/default/netdiff
+
 [ -z "${WHAT}" ] && usage && exit 0
-if [[ -z "${PORT}" || ${PORT} == 0 ]]; then
-  PORT=1234
-  declare -r DIFF_DEFAULT_OPTS='--unified --recursive'
-fi
+[ -z "${DIFF_OPTS}" ] && DIFF_OPTS="${DEFAULT_DIFF_OPTS}"
+
+[[ -z "${PORT}" || ${PORT} == 0 ]] && PORT=${DEFAULT_PORT}
 
 declare -r TMPWHAT=$(mktemp --directory)
-
 declare -r BASENAME=$(basename "${WHAT}")
+
 cd $(dirname "${WHAT}")
 
 set -o pipefail
@@ -47,9 +49,10 @@ fi
 
 if [ ${RC} -ne 0 ]; then
   echo 'Could not copy file via the network'
-  RC=2 # Default trouble exit status of diff 
+  # Default trouble exit status of diff 
+  RC=2 
 else
-  diff $@ "${WHAT}" ${TMPWHAT} ${DIFF_DEFAULT_OPTS}
+  diff $@ "${WHAT}" ${TMPWHAT} ${DIFF_OPTS} 
   RC=$?
 fi
 
