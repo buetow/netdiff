@@ -7,36 +7,41 @@ declare -r VERSION='VERSION_DEVEL'
 declare -i RC=0
 
 declare -r SERVER="${1}" ; shift
-declare -r PATH="${1}"   ; shift
+declare -r WHAT="${1}"   ; shift
 declare -i PORT="${1}"   ; shift
+
 
 usage () {
   cat <<USAGE
 This is NetDiff ${VERSION}. Usage:
-  netdiff SERVER PATH [PORT=1234] [DIFF OPTS]
+  netdiff SERVER WHAT [PORT=1234] [DIFF OPTS]
 USAGE
 }
 
-[ -z "${PATH}" ] && usage && exit 0
+[ -z "${WHAT}" ] && usage && exit 0
 if [[ -z "${PORT}" || ${PORT} == 0 ]]; then
   PORT=1234
   declare -r DIFF_DEFAULT_OPTS='--unified --recursive'
 fi
 
-declare -r TMPPATH=$(mktemp --directory)
-set -e pipefail
+declare -r TMPWHAT=$(mktemp --directory)
+
+declare -r BASENAME=$(basename "${WHAT}")
+cd $(dirname "${WHAT}")
+
+set -o pipefail
 
 if [[ "${SERVER}" == "$(hostname)" || 
   "${SERVER}" == "$(hostname --fqdn)" ]]; then
-  tar -cf - . --directory "${PATH}" |
+  tar -cf - "${BASENAME}" |
   nc -l -p ${PORT} |
-  tar -xf - --directory ${TMPPATH}
+  tar -xf - --directory ${TMPWHAT}
   RC=$?
 else
   sleep 0.1
-  tar -cf - . --directory "${PATH}" |
+  tar -cf - "${BASENAME}" |
   nc ${SERVER} ${PORT} |
-  tar -xf - --directory ${TMPPATH}
+  tar -xf - --directory ${TMPWHAT}
   RC=$?
 fi
 
@@ -44,10 +49,10 @@ if [ ${RC} -ne 0 ]; then
   echo 'Could not copy file via the network'
   RC=2 # Default trouble exit status of diff 
 else
-  diff $@ "${PATH}" ${TMPPATH} ${DIFF_DEFAULT_OPTS}
+  diff $@ "${WHAT}" ${TMPWHAT} ${DIFF_DEFAULT_OPTS}
   RC=$?
 fi
 
-[ -f ${TMPPATH} ] && rm -rf ${TMPPATH}
+[ -f ${TMPWHAT} ] && rm -rf ${TMPWHAT}
 exit ${RC}
 
