@@ -124,25 +124,49 @@
 .\" ========================================================================
 .\"
 .IX Title "NETDIFF 1"
-.TH NETDIFF 1 "2014-06-20" "netdiff 0.0.4devel1" "User Commands"
+.TH NETDIFF 1 "2014-06-21" "netdiff 0.0.4devel1" "User Commands"
 .\" For nroff, turn off justification.  Always turn off hyphenation; it makes
 .\" way too many mistakes in technical documents.
 .if n .ad l
 .nh
 .SH "NAME"
-netdiff \- A netdiff project
-.SH "WTF?"
-.IX Header "WTF?"
-A simple script to diff two files via the network.
-.SS "usage"
-.IX Subsection "usage"
-ClusterSSH onto two hosts at the same time and run on both hosts the same command like:
+netdiff \- A simple script to diff a file or a directory of two hosts over the network.
+.PP
+This is very helpfull if you want to find out any difference of these two hosts.
+.SS "\s-1SYNOPSYS\s0"
+.IX Subsection "SYNOPSYS"
+.Vb 1
+\&  netdiff HOSTNAME PATH [ADDITIONAL DIFF OPTS]
+.Ve
+.SS "\s-1USAGE\s0"
+.IX Subsection "USAGE"
+Cluster-SSH into two hosts at the same time and run on both hosts the same 
+(simultaneous):
 .PP
 .Vb 1
 \&    netdiff HOSTNAME PATH
 .Ve
 .PP
 Where \s-1HOSTNAME\s0 can be the hostname of the first or the second host. Depending on this the script will decide to be the client or the server role.
+.PP
+And where \s-1PATH\s0 musst be a full qualified path to a file or a directory.
+.PP
+Netdiff transfers everything in \s-1PATH\s0 (recursively and encrypted via OpenSSL/AES) to the other host and computes a diff of it.
+.SS "\s-1EXAMPLE\s0"
+.IX Subsection "EXAMPLE"
+A common use case is to find out the differences of the \s-1PAM\s0 configuration. On most systems the \s-1PAM\s0 configuration is spread into several small configuration files which are hard to compare by hand between two hosts.
+.PP
+Given two hosts one.example.com and two.example.com. Just run this command on both hosts:
+.PP
+.Vb 1
+\&  netdiff one.example.com /etc/pam.d
+.Ve
+.PP
+The same affect, but the other way around would be the following command:
+.PP
+.Vb 1
+\&  netdiff two.example.com /etc/pam.d
+.Ve
 .SH "LICENSE"
 .IX Header "LICENSE"
 See package description or project website.

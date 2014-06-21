@@ -52,7 +52,7 @@ if [ ${RC} -ne 0 ]; then
   # Default trouble exit status of diff 
   RC=2 
 else
-  diff $@ "${WHAT}" ${TMPWHAT} ${DIFF_OPTS} 
+  diff $@ "${WHAT}" "${TMPWHAT}/${BASENAME}" ${DIFF_OPTS}
   RC=$?
 fi
 
