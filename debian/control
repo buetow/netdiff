@@ -10,6 +10,6 @@ Vcs-Browser: https://github.com/rantanplan/netdiff
 
 Package: netdiff
 Architecture: all
-Depends:
+Depends: coreutils, openssl, tar, bash
 Description: Small netdiff package
  This utility can be used to diff files accross the network

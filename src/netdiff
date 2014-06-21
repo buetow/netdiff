@@ -31,24 +31,33 @@ declare -r BASENAME=$(basename "${WHAT}")
 
 cd $(dirname "${WHAT}")
 
+# An attacker does not know which file is diffed. So it's a shared secret
+# between the two hosts
+declare -r AESPASS=$(md5sum <<< "${SERVER}:${PORT}/${WHAT}" | cut -d' ' -f1)
+declare -r OPENSSL_OPTS="enc -aes-256-cbc -base64 -salt -pass pass:${AESPASS}"
+
 set -o pipefail
 
 if [[ "${SERVER}" == "$(hostname)" || 
   "${SERVER}" == "$(hostname --fqdn)" ]]; then
   tar -cf - "${BASENAME}" |
+  openssl ${OPENSSL_OPTS} |
   nc -l -p ${PORT} |
+  openssl ${OPENSSL_OPTS} -d |
   tar -xf - --directory ${TMPWHAT}
   RC=$?
 else
   sleep 0.1
   tar -cf - "${BASENAME}" |
+  openssl ${OPENSSL_OPTS} |
   nc ${SERVER} ${PORT} |
+  openssl ${OPENSSL_OPTS} -d |
   tar -xf - --directory ${TMPWHAT}
   RC=$?
 fi
 
 if [ ${RC} -ne 0 ]; then
-  echo 'Could not copy file via the network'
+  echo 'Something went wrong, could not diff'
   # Default trouble exit status of diff 
   RC=2 
 else
