@@ -1,3 +1,9 @@
+netdiff (0.0.4devel1) unstable; urgency=low
+
+  * Test debian
+
+ -- Paul Buetow <paul@buetow.org>  Sat, 21 Jun 2014 10:55:30 +0200
+
 netdiff (0.0.3) stable; urgency=low
 
   * Fix the exit status, always exit with the status of diff
