@@ -65,6 +65,6 @@ else
   RC=$?
 fi
 
-[ -f ${TMPWHAT} ] && rm -rf ${TMPWHAT}
+[ -d ${TMPWHAT} ] && rm -rf ${TMPWHAT}
 exit ${RC}
 
