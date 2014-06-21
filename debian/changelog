@@ -1,8 +1,10 @@
-netdiff (0.0.4devel1) unstable; urgency=low
+netdiff (0.1.0) stable; urgency=low
 
-  * Test debian
+  * Initial usable version
+  * Implemented recursive diff of directories
+  * Implemented AES encryption via OpenSSL
 
- -- Paul Buetow <paul@buetow.org>  Sat, 21 Jun 2014 10:55:30 +0200
+ -- Paul Buetow <paul@buetow.org>  Sat, 21 Jun 2014 11:16:49 +0200
 
 netdiff (0.0.3) stable; urgency=low
 
