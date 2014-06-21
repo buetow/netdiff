@@ -2,8 +2,8 @@ NAME
     netdiff - A simple script to diff a file or a directory of two hosts
     over the network.
 
-    This is very helpfull if you want to find out any difference of these
-    two hosts.
+    This is very helpful if you want to find out any difference of these two
+    hosts.
 
   SYNOPSYS
       netdiff HOSTNAME PATH [PORT] [ADDITIONAL DIFF OPTS]
