@@ -6,7 +6,7 @@ NAME
     two hosts.
 
   SYNOPSYS
-      netdiff HOSTNAME PATH [ADDITIONAL DIFF OPTS]
+      netdiff HOSTNAME PATH [PORT] [ADDITIONAL DIFF OPTS]
 
   USAGE
     Cluster-SSH into two hosts at the same time and run on both hosts the
@@ -22,6 +22,11 @@ NAME
 
     Netdiff transfers everything in PATH (recursively and encrypted via
     OpenSSL/AES) to the other host and computes a diff of it.
+
+    If no port is specified the default port will be used, which is defined
+    in
+
+      /etc/default/netdiff
 
   EXAMPLE
     A common use case is to find out the differences of the PAM

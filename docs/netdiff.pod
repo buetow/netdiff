@@ -6,7 +6,7 @@ This is very helpfull if you want to find out any difference of these two hosts.
 
 =head2 SYNOPSYS
 
-  netdiff HOSTNAME PATH [ADDITIONAL DIFF OPTS]
+  netdiff HOSTNAME PATH [PORT] [ADDITIONAL DIFF OPTS]
 
 =head2 USAGE
 
@@ -20,6 +20,10 @@ Where HOSTNAME can be the hostname of the first or the second host. Depending on
 And where PATH musst be a full qualified path to a file or a directory.
 
 Netdiff transfers everything in PATH (recursively and encrypted via OpenSSL/AES) to the other host and computes a diff of it.
+
+If no port is specified the default port will be used, which is defined in
+
+  /etc/default/netdiff
 
 =head2 EXAMPLE
 

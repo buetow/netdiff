@@ -136,7 +136,7 @@ This is very helpfull if you want to find out any difference of these two hosts.
 .SS "\s-1SYNOPSYS\s0"
 .IX Subsection "SYNOPSYS"
 .Vb 1
-\&  netdiff HOSTNAME PATH [ADDITIONAL DIFF OPTS]
+\&  netdiff HOSTNAME PATH [PORT] [ADDITIONAL DIFF OPTS]
 .Ve
 .SS "\s-1USAGE\s0"
 .IX Subsection "USAGE"
@@ -152,6 +152,12 @@ Where \s-1HOSTNAME\s0 can be the hostname of the first or the second host. Depen
 And where \s-1PATH\s0 musst be a full qualified path to a file or a directory.
 .PP
 Netdiff transfers everything in \s-1PATH\s0 (recursively and encrypted via OpenSSL/AES) to the other host and computes a diff of it.
+.PP
+If no port is specified the default port will be used, which is defined in
+.PP
+.Vb 1
+\&  /etc/default/netdiff
+.Ve
 .SS "\s-1EXAMPLE\s0"
 .IX Subsection "EXAMPLE"
 A common use case is to find out the differences of the \s-1PAM\s0 configuration. On most systems the \s-1PAM\s0 configuration is spread into several small configuration files which are hard to compare by hand between two hosts.
