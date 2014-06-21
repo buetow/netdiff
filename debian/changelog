@@ -1,3 +1,9 @@
+netdiff (0.1.1) stable; urgency=low
+
+  * Document also the default port.
+
+ -- Paul Buetow <paul@buetow.org>  Sat, 21 Jun 2014 11:21:59 +0200
+
 netdiff (0.1.0) stable; urgency=low
 
   * Initial usable version
