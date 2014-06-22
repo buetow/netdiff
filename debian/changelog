@@ -1,3 +1,9 @@
+netdiff (0.1.5) stable; urgency=low
+
+  * Some minor documentation enhancements
+
+ -- Paul Buetow <paul@buetow.org>  Sun, 22 Jun 2014 11:10:29 +0200
+
 netdiff (0.1.4) stable; urgency=low
 
   * Bugfix: Cleaning up temp directory after the diff
