@@ -5,8 +5,8 @@ Maintainer: Paul C. Buetow <paul@buetow.org>
 Build-Depends: 
 Standards-Version: 3.9.2
 Homepage: https://netdiff.buetow.org
-Vcs-Git: https://github.com/rantanplan/netdiff.git
-Vcs-Browser: https://github.com/rantanplan/netdiff
+Vcs-Git: https://github.com/buetow/netdiff.git
+Vcs-Browser: https://github.com/buetow/netdiff
 
 Package: netdiff
 Architecture: all
